@@ -20,14 +20,8 @@ public class UserController {
         return userService.register(registerReq);
     }
 
-    @GetMapping("/demo")
-    public String demo(){
-        return "hjfla";
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginReq loginReq){
+        return userService.login(loginReq);
     }
-
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody LoginReq loginReq){
-//        return userService.login(loginReq);
-//    }
 }

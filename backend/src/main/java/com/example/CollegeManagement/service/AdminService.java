@@ -31,13 +31,13 @@ public class AdminService {
         return ResponseEntity.ok("added");
     }
 
-    public ResponseEntity<?> getStudentsToAdd() {
-        List<User> users= userRepo.findAll().stream().filter(user -> user.getStudent()==null).toList();
-        return ResponseEntity.status(200).body(users);
-    }
-
-    public ResponseEntity<?> getAllStudents() {
-        List<User> userList=userRepo.findAll();
-        return ResponseEntity.ok(userList);
-    }
+//    public ResponseEntity<?> getStudentsToAdd() {
+//        List<User> users= userRepo.findAll().stream().filter(user -> user.getStudent()==null).toList();
+//        return ResponseEntity.status(200).body(users);
+//    }
+//
+//    public ResponseEntity<?> getAllStudents() {
+//        List<User> userList=userRepo.findAll();
+//        return ResponseEntity.ok(userList);
+//    }
 }
