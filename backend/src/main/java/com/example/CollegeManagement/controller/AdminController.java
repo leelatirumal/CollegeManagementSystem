@@ -20,11 +20,11 @@ public class AdminController {
     }
 
 
-//    @GetMapping("/getStudentsToAdd")
-//    public ResponseEntity<?> getStudentsToAdd(){
-//        return adminService.getStudentsToAdd();
-//    }
-//
+    @GetMapping("/getStudentsToAdd")
+    public ResponseEntity<?> getStudentsToAdd(){
+        return adminService.getStudentsToAdd();
+    }
+
 //
 //    @GetMapping("/getAllStudents")
 //    public ResponseEntity<?> getAllStudents(){

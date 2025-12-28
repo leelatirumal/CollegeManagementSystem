@@ -21,6 +21,7 @@ public class AdminService {
     private StudentRepo studentRepo;
     @Autowired
     private UserRepo userRepo;
+
     public ResponseEntity<?> addStudent(Student student,String id) {
         Optional<User> userOptional= userRepo.findByUserId(id);
 
@@ -31,13 +32,14 @@ public class AdminService {
         return ResponseEntity.ok("added");
     }
 
-//    public ResponseEntity<?> getStudentsToAdd() {
-//        List<User> users= userRepo.findAll().stream().filter(user -> user.getStudent()==null).toList();
-//        return ResponseEntity.status(200).body(users);
-//    }
-//
-//    public ResponseEntity<?> getAllStudents() {
-//        List<User> userList=userRepo.findAll();
-//        return ResponseEntity.ok(userList);
-//    }
+    public ResponseEntity<?> getStudentsToAdd() {
+
+        List<User> users= userRepo.listOfStudentsToAdd();
+        return ResponseEntity.status(200).body(users);
+    }
+
+    public ResponseEntity<?> getAllStudents() {
+        List<User> userList=userRepo.findAll();
+        return ResponseEntity.ok(userList);
+    }
 }
