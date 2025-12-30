@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 function StudentDashboard() {
   const navigate = useNavigate();
-  const student = JSON.parse(localStorage.getItem("student"));
+  const student = localStorage.getItem("student");
 
   return (
     <div className="container">
@@ -16,8 +16,9 @@ function StudentDashboard() {
         color:"#fff",
         textAlign:"center"
       }}>
-        <p><strong>Email:</strong> {student.email}</p>
-        <p><strong>Status:</strong> Approved ✅</p>
+        <p><strong>Student ID:</strong> {student.studentId}</p>
+        <p><strong>Student ID:</strong> {student.firstName}</p>
+
       </div>
 
       <button onClick={() => navigate("/")}>Logout</button>

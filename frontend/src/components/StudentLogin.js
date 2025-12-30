@@ -1,8 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 function StudentLogin() {
-  const [email, setEmail] = useState("");
+  const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState(null);
@@ -15,47 +16,63 @@ function StudentLogin() {
   };
 
   const handleLogin = () => {
+
+    let userData = {
+      userId: userId,
+      password: password,
+    }
+    axios.post("http://localhost:8083/api/user/login", userData)
+      .then(response => {
+        console.log("Success:", response.data);
+        localStorage.setItem("student", JSON.stringify(response.data));
+        alert("Logged in successfully!");
+        navigate("/student-dashboard");
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+
     setLoading(true);
 
-    setTimeout(() => {
-      const student = JSON.parse(localStorage.getItem("student"));
+    // setTimeout(() => {
+    //   const student = JSON.parse(localStorage.getItem("student"));
 
-      /* ❌ No student found */
-      if (!student) {
-        showToast("Please register first", "error");
-        setLoading(false);
-        return;
-      }
+    //   /* ❌ No student found */
+    //   if (!student) {
+    //     showToast("Please register first", "error");
+    //     setLoading(false);
+    //     return;
+    //   }
 
-      /* ❌ Wrong credentials */
-      if (email !== student.email || password !== student.password) {
-        showToast("Invalid email or password", "error");
-        setLoading(false);
-        return;
-      }
+    //   /* ❌ Wrong credentials */
+    //   if (userId !== student.userId || password !== student.password) {
+    //     showToast("Invalid userId or password", "error");
+    //     setLoading(false);
+    //     return;
+    //   }
 
-      /* ⏳ Pending approval */
-      if (student.status === "pending") {
-        showToast("Waiting for admin approval ⏳", "error");
-        setLoading(false);
-        return;
-      }
+    //   /* ⏳ Pending approval */
+    //   // if (student.status === "pending") {
+    //   //   showToast("Waiting for admin approval ⏳", "error");
+    //   //   setLoading(false);
+    //   //   return;
+    //   // }
 
-      /* ❌ Rejected by admin */
-      if (student.status === "rejected") {
-        showToast("Your account has been rejected by admin ❌", "error");
-        setLoading(false);
-        return;
-      }
+    //   // /* ❌ Rejected by admin */
+    //   // if (student.status === "rejected") {
+    //   //   showToast("Your account has been rejected by admin ❌", "error");
+    //   //   setLoading(false);
+    //   //   return;
+    //   // }
 
-      /* ✅ Approved */
-      if (student.status === "approved") {
-        showToast("Login successful 🎉", "success");
-        setTimeout(() => {
-          navigate("/student-dashboard");
-        }, 1200);
-      }
-    }, 1200);
+    //   // /* ✅ Approved */
+    //   // if (student.status === "approved") {
+    //   //   showToast("Login successful 🎉", "success");
+    //   //   setTimeout(() => {
+    //   //     navigate("/student-dashboard");
+    //   //   }, 1200);
+    //   // }
+    // }, 1200);
   };
 
   return (
@@ -71,10 +88,10 @@ function StudentLogin() {
         <h2>Student Login</h2>
 
         <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          placeholder="UserId"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
         />
 
         <input
