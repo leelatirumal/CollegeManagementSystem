@@ -1,6 +1,4 @@
-/* =========================
-   BASE RESET & GLOBAL
-   ========================= */
+
 *{
   margin:0;
   padding:0;
@@ -21,9 +19,7 @@ body{
   overflow:hidden;
 }
 
-/* =========================
-   MAIN CONTAINER (GLASS)
-   ========================= */
+
 .container{
   width:380px;
   position: relative;
